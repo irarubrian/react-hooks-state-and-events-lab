@@ -1,22 +1,28 @@
-import React from "react";
-import ShoppingList from "./ShoppingList";
-import itemData from "../data/items";
+import React, { useState } from 'react'; // Import React and useState hook
+import ShoppingList from './ShoppingList'; // Import ShoppingList component
+import Item from './Item'; // Import ItemForm component
 
 function App() {
+  // State to manage dark mode (false = light mode, true = dark mode)
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // replace 'false' with a state variable that can be toggled between true and false
-  // this will be used for the Dark Mode Toggle feature
-  const appClass = false ? "App dark" : "App light"
+  // Function to toggle dark mode
+  const toggleDarkMode = () => {
+    setIsDarkMode((prevMode) => !prevMode); // Toggle the state
+  };
 
   return (
-    <div className={appClass}>
-      <header>
-        <h2>Shopster</h2>
-        <button>Dark Mode</button>
-      </header>
-      <ShoppingList items={itemData} />
+    // Dynamically set the className based on isDarkMode
+    <div className={`App ${isDarkMode ? 'dark' : 'light'}`}>
+      {/* Button to toggle dark mode */}
+      <button onClick={toggleDarkMode}>
+        {isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+      </button>
+      {/* Render ShoppingList and ItemForm components */}
+      <ShoppingList />
+      <Item />
     </div>
   );
 }
 
-export default App;
+export default App; // Export App component
